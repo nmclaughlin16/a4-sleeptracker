@@ -1,4 +1,4 @@
---Readme document for *author(s)*, *email(s)*, *UCI id(s)*--
+--Readme document for Nathan McLaughlin, namclaug@uci.edu, 60824328--
 
 1. How many assignment points do you believe you completed (replace the *'s with your numbers)?
 
