@@ -15,7 +15,7 @@ export class StorageService {
   }
 
   //Return value associated with key
-    public async get(key: string): Promise<void> {
+    public async get(key: string): Promise<any> {
         const store = await this.ready;
         return store.get(key);
     }
