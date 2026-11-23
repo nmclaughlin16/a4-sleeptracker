@@ -1,27 +1,43 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+// center all of Home's content vertically like lock screen aesthetic
+.center-page {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+// cards side by side with a gap between them, like the iPhone lock screen widgets
+.cards {
+  display: flex;
+  gap: 10px;
 }
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
+.cards ion-card {
+  flex: 1;
   margin: 0;
 }
 
-#container a {
-  text-decoration: none;
+// greeting text smaller and lighter than clock
+.greeting {
+  text-align: center;
+  font-size: 1.4rem;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+// clock text big and light like iphone lock screen and apple font
+.clock {
+  text-align: center;
+  font-size: 4.9rem;
+  font-weight: 300;
+  margin: 0 0 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+// card style remove box shadow and 14% white background
+// --color makes to make card text white to contrast
+ion-card {
+  --background: rgba(255, 255, 255, 0.14);
+  --color: #ffffff;
+  border-radius: 18px;
+  margin: 10px 0 0;
 }

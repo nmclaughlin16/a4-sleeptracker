@@ -1,15 +1,119 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <!-- back button on left side navigates back to the home page-->
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
 
-    <!-- capitalized the generated "logbook" title -->
+    <!-- page title -->
     <ion-title>Logbook</ion-title>
+
+    <!-- buttons that open forms for logging sleep (alarm icon) or sleepiness (battery-half icon)  -->
+    <ion-buttons slot="end">
+      <ion-button (click)="openForm('sleep')">
+        <ion-icon slot="icon-only" name="alarm"></ion-icon>
+      </ion-button>
+      <ion-button (click)="openForm('sleepiness')">
+        <ion-icon slot="icon-only" name="battery-half"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <!-- placeholder; the list of logs and the + button go here next -->
+<ion-content>
+  <!-- Sleep logs. *ngFor makes one row per log. -->
+  <ion-list>
+    <ion-list-header>Sleep</ion-list-header>
+    <ion-item *ngFor="let log of overnightLogs">
+      <ion-label>
+        <h2>{{ log.summaryString() }}</h2>
+        <p>{{ log.dateString() }}</p>
+      </ion-label>
+      <!-- uh oh design principle. red trash button deletes the log -->
+      <ion-button slot="end" fill="clear" color="danger" (click)="deleteLog(log)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- list of sleepiness logs, same layout as sleep -->
+  <ion-list>
+    <ion-list-header>Sleepiness</ion-list-header>
+    <ion-item *ngFor="let log of sleepinessLogs">
+      <ion-label>
+        <h2>{{ log.summaryString() }}</h2>
+        <p>{{ log.dateString() }}</p>
+      </ion-label>
+      <ion-button slot="end" fill="clear" color="danger" (click)="deleteLog(log)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- pop-up form, shows when isFormOpen is true.  -->
+  <ion-modal [isOpen]="isFormOpen" (didDismiss)="closeForm()">
+    <ng-template>
+      <!-- cancel on the left, save on the right. title changes with the form either log sleep or sleepiness -->
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="closeForm()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>{{ formType === 'sleep' ? 'Log Sleep' : 'Log Sleepiness' }}</ion-title>
+          <ion-buttons slot="end">
+            <!-- error prevention. no saving until times are valid -->
+            <ion-button (click)="saveForm()" [disabled]="formType === 'sleep' && !sleepIsValid">Save</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <!-- Sleep time form shown -->
+        <ng-container *ngIf="formType === 'sleep'">
+          <!-- woke up first since users log in the morning -->
+          <p>Woke up</p>
+          <ion-datetime-button datetime="waketime"></ion-datetime-button>
+
+          <p>Went to bed</p>
+          <ion-datetime-button datetime="bedtime"></ion-datetime-button>
+
+          <!-- hours slept, or the error message if times invalid -->
+          <p [class.error]="!sleepIsValid">{{ sleepMessage }}</p>
+
+          <!-- calendar and clock pop-up for the buttons above. saves times to the .ts file, can't pick future times -->
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="waketime" [max]="maxTime" [(ngModel)]="wakeTime"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="bedtime" [max]="maxTime" [(ngModel)]="bedtime"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ng-container>
+
+        <!-- sleepiness form shown -->
+        <ng-container *ngIf="formType === 'sleepiness'">
+          <!-- rating and description updates live as the slider moves -->
+          <p>Sleepiness on a scale of 1-7? {{ sleepinessValue }}</p>
+
+          <!-- 1-7 slider -->
+          <ion-range [min]="1" [max]="7" [(ngModel)]="sleepinessValue"></ion-range>
+
+          <!-- imported stanford sleepiness scale description matching rating -->
+          <p>{{ scaleValues[sleepinessValue] }}</p>
+
+          <!-- when they felt this way. defaults to now, max error prevention-->
+          <p>When</p>
+          <ion-datetime-button datetime="sleepinesstime"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="sleepinesstime" [max]="maxTime" [(ngModel)]="sleepinessTime"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ng-container>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

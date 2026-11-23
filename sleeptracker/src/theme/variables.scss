@@ -1,2 +1,13 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+// root.ios overrides ionic defaults for dark theme
+:root.ios,
+// the ion-modal for matching colors in both forms
+:root.ios ion-modal {
+  // color variables for the app's dark mode theme (styling works for ios)
+  --ion-background-color: #20283e;
+  --ion-background-color-rgb: 32, 40, 62;
+  --ion-toolbar-background: #20283e;
+  --ion-item-background: #20283e;
+}

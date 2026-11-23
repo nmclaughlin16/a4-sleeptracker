@@ -1,10 +1,11 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title style="text-align:center; font-size:2.5rem; font-family:Georgia, 'Times New Roman', Times, serif">
+    <!-- font size 1.87 (fits on iphone 16 view) so it fits next to the Logbook button -->
+    <ion-title style="text-align:center; font-size:1.87rem; font-family:Georgia, 'Times New Roman', Times, serif">
       Sleep Tracker
     </ion-title>
 
-        <!-- logbook button for navigating to the logbook page -->
+        <!-- Logbook button on the right to route to the logbook page. icon-only button with a book icon-->
     <ion-buttons slot="end">
       <ion-button routerLink="/logbook">
         <ion-icon slot="icon-only" name="book"></ion-icon>
@@ -13,12 +14,53 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <!-- placeholder for weekly graph -->
-  <p>sleep graph here</p>
-</ion-content>
+<ion-content class="ion-padding">
+  <!-- wrapper that fills and centers content to fill screen-->
+  <div class="center-page">
+    <!-- greeting and clock in classes for styling matched with home.page.scss -->
+    <p class="greeting">{{ greeting }}</p>
+    <p class="clock">{{ currentTime }}</p>
 
-<!-- below seems to be how to save data using ionic-storage
- @if(namedSaved())
- @else --
- install the capaciter -->
+    <!-- weekley average cards -->
+    <div class="cards">
+      <ion-card>
+        <ion-card-content>
+          <p>Avg Sleep this week</p>
+          <h2>{{ avgSleepThisWeek }}</h2>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-content>
+          <p>Avg Sleepiness this week</p>
+          <h2>{{ avgSleepinessThisWeek }}</h2>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- most recent sleep log or no sleep logged yet if none -->
+    <ion-card>
+      <ion-card-content>
+        <p>Last Sleep</p>
+        @if (lastSleep) {
+          <h2>{{ lastSleep.summaryString() }}</h2>
+          <p>{{ lastSleep.dateString() }}</p>
+        } @else {
+          <h2>No sleep logged yet</h2>
+        }
+      </ion-card-content>
+    </ion-card>
+
+    <!-- most recent sleepiness log or no sleepiness logged yet if none -->
+    <ion-card>
+      <ion-card-content>
+        <p>Last Sleepiness</p>
+        @if (lastSleepiness) {
+          <h2>{{ lastSleepiness.summaryString() }}</h2>
+          <p>{{ lastSleepiness.dateString() }}</p>
+        } @else {
+          <h2>No sleepiness logged yet</h2>
+        }
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
