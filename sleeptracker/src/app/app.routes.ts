@@ -10,4 +10,9 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  // Logbook page where users add/delete entries
+  {
+    path: 'logbook',
+    loadComponent: () => import('./logbook/logbook.page').then(m => m.LogbookPage),
+  },
 ];
