@@ -2,3 +2,76 @@
 .error {
   color: var(--ion-color-danger);
 }
+
+.day-card {
+  margin: 12px;
+}
+
+ion-card-title {
+  font-size: 1.1rem;
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.entry + .entry {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.entry-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.entry-title {
+  font-size: 1rem;
+}
+
+.entry-sub {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.marker {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #5b5fd6;
+  color: #fff;
+  ion-icon { font-size: 20px; }
+}
+
+.badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 700;
+  color: #111;
+}
+
+// different colors for each number  1-7
+@for $i from 1 through 7 {
+  $hue: 160 - ($i - 1) * 21.67;
+  .level-#{$i} {
+    background: hsl($hue, 65%, 60%);
+  }
+}
+
+.empty {
+  text-align: center;
+  opacity: 0.7;
+  margin-top: 48px;
+  padding: 0 24px;
+}

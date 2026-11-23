@@ -64,3 +64,20 @@
     </ion-card>
   </div>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="log-buttons">
+    <ion-button class="log-button log-sleep" routerLink="/logbook" [queryParams]="{ form: 'sleep' }">
+      <span class="stack">
+        <ion-icon name="alarm"></ion-icon>
+        <span class="label">Log sleep</span>
+      </span>
+    </ion-button>
+    <ion-button class="log-button log-sleepiness" routerLink="/logbook" [queryParams]="{ form: 'sleepiness' }">
+      <span class="stack">
+        <ion-icon name="battery-half"></ion-icon>
+        <span class="label">Log sleepiness</span>
+      </span>
+    </ion-button>
+  </div>
+</ion-footer>

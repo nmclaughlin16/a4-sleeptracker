@@ -41,3 +41,49 @@ ion-card {
   border-radius: 18px;
   margin: 10px 0 0;
 }
+
+//for two buttons at bottom of home page
+.log-buttons {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+}
+
+.log-button {
+  flex: 1;                         // each button takes half the width
+  margin: 0;
+  height: 72px;                    // taller to fit icon + label
+  --border-radius: 16px;
+  --box-shadow: none;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  text-transform: none;
+}
+
+// icon on top, label underneath
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stack ion-icon {
+  font-size: 26px;
+}
+
+.stack .label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.log-sleep {
+  --background: #5b5fd6;           // indigo
+  --color: #ffffff;
+}
+
+.log-sleepiness {
+  --background: #f2b84b;           // amber
+  --color: #1a1405;                // dark text for contrast
+}

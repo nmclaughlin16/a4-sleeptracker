@@ -21,34 +21,46 @@
 </ion-header>
 
 <ion-content>
-  <!-- Sleep logs. *ngFor makes one row per log. -->
-  <ion-list>
-    <ion-list-header>Sleep</ion-list-header>
-    <ion-item *ngFor="let log of overnightLogs">
-      <ion-label>
-        <h2>{{ log.summaryString() }}</h2>
-        <p>{{ log.dateString() }}</p>
-      </ion-label>
-      <!-- uh oh design principle. red trash button deletes the log -->
-      <ion-button slot="end" fill="clear" color="danger" (click)="deleteLog(log)">
-        <ion-icon slot="icon-only" name="trash"></ion-icon>
-      </ion-button>
-    </ion-item>
-  </ion-list>
+  <!-- one card per day, newest events on that day should come first -->
+  @for (day of days; track day.key) {
+    <ion-card class="day-card">
+      <ion-card-header>
+        <ion-card-title>{{ day.heading }}</ion-card-title>
+      </ion-card-header>
 
-  <!-- list of sleepiness logs, same layout as sleep -->
-  <ion-list>
-    <ion-list-header>Sleepiness</ion-list-header>
-    <ion-item *ngFor="let log of sleepinessLogs">
-      <ion-label>
-        <h2>{{ log.summaryString() }}</h2>
-        <p>{{ log.dateString() }}</p>
-      </ion-label>
-      <ion-button slot="end" fill="clear" color="danger" (click)="deleteLog(log)">
-        <ion-icon slot="icon-only" name="trash"></ion-icon>
-      </ion-button>
-    </ion-item>
-  </ion-list>
+      <ion-card-content>
+        <!-- overnight sleep for day -->
+        @for (s of day.sleep; track s.id) {
+          <div class="entry">
+            <div class="marker"><ion-icon name="alarm"></ion-icon></div>
+            <div class="entry-text">
+              <div class="entry-title">Slept {{ durationString(s) }}</div>
+              <div class="entry-sub">{{ timeString(s.sleepStart) }} → {{ timeString(s.sleepEnd) }}</div>
+            </div>
+            <ion-button fill="clear" color="danger" (click)="deleteLog(s)">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+          </div>
+        }
+
+        <!-- sleepiness entries for day -->
+        @for (s of day.sleepiness; track s.id) {
+          <div class="entry">
+            <div class="badge level-{{ s.loggedValue }}">{{ s.loggedValue }}</div>
+            <div class="entry-text">
+              <div class="entry-title">{{ scaleValues[s.loggedValue] }}</div>
+              <div class="entry-sub">{{ timeString(s.loggedAt) }}</div>
+            </div>
+            <ion-button fill="clear" color="danger" (click)="deleteLog(s)">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+          </div>
+        }
+      </ion-card-content>
+    </ion-card>
+  } @empty {
+    <p class="empty">Nothing logged yet. Tap the alarm or battery icon above to add your first entry.</p>
+  }
 
   <!-- pop-up form, shows when isFormOpen is true.  -->
   <ion-modal [isOpen]="isFormOpen" (didDismiss)="closeForm()">

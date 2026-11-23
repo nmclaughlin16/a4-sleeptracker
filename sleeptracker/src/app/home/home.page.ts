@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 // added IonButtons, IonButton, IonIcon
 // added IonCard, IonCardContent (the cards on Home)
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon, IonCard, IonCardContent } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon, IonCard, IonCardContent, IonFooter } from '@ionic/angular/standalone';
 import { SleepService } from '../services/sleep.service';
 import { OvernightSleepData } from '../data/overnight-sleep-data';
 import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
@@ -10,7 +10,7 @@ import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
 import { RouterLink } from '@angular/router';
 // addIcons + book icon
 import { addIcons } from 'ionicons';
-import { book } from 'ionicons/icons';
+import { book, alarm, batteryHalf } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +18,7 @@ import { book } from 'ionicons/icons';
   styleUrls: ['home.page.scss'],
   // added IonButtons, IonButton, IonIcon, RouterLink
   // added IonCard, IonCardContent (the cards on Home)
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon, IonCard, IonCardContent, RouterLink],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon, IonCard, IonCardContent, RouterLink, IonFooter],
 })
 export class HomePage {
   // greeting "Good morning" / "Good afternoon" / "Good evening" and the time shown at the top of home page
@@ -28,7 +28,7 @@ export class HomePage {
   // sleepService is needed so saved data loads on refresh
   constructor(private sleepService: SleepService) {
     // register the book icon used by the Logbook button
-    addIcons({ book });
+    addIcons({ book, alarm, batteryHalf });
 	}
 
 	// waits for saved data to load so it shows on refresh
