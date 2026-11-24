@@ -12,15 +12,17 @@
 - 1/1 A readme and demo video which explains how these features were implemented and their design rationale
 
 2. How long, in hours, did it take you to complete this assignment?
-15 hours
+30 hours
 
 
 3. What online resources did you consult when completing this assignment? (list specific URLs)
-
+https://ionicframework.com/docs
+https://ionic.io/ionicons
+https://angular.dev
 
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
-
+n/a
 
 
 5. Is there anything special we need to know in order to run your code?
@@ -31,7 +33,8 @@ No, just the standard "ionic serve" should work.
 
 
 6. Did you design your app with a particular type of user in mind? If so, whom?
-Please view the app in devtools with an iPhone 16 device selected
+Please view the app in devtools with an iPhone 16 device selected, it was intended for an ios
+user.
 
 
 7. Did you design your app specifically for iOS or Android, or both?
@@ -41,7 +44,7 @@ Ios, followed conventions like logbook button/save on the top right and then bac
 8. How can a person log overnight sleep in your app? Why did you choose to support logging overnight sleep in this way?
 
 On the home page, the two buttons at the bottom allow users to track overnight sleep and sleepiness respectively. A brief form shows up, where
-the user picks a date and time for when they woke up and when they went to bed. We choose this design since when the user opens the app, there's 
+the user picks a date and time for when they woke up and when they went to bed. We choose this design since when the user opens the app, there's
 a good chance they are going to log one of those two things, so putting it on the home page makes it quite convinient for them.
 We also decided to allow users to log overnight sleep on the logbook page. To do this, users can click on the clock (for sleep) or battery (for sleepiness)
 in the top right corner. We decided to also put this feature on the logbook page in case the user wanted to update any data while looking at the logs.
@@ -53,7 +56,7 @@ belonged on the logbook page so that they could choose to log it while looking a
 
 10. How can a person view the data they logged in your app? Why did you choose to support viewing logged data in this way?
 
-The home screen shows data with relevant and calculated averages for the past week. 
+The home screen shows data with relevant and calculated averages for the past week.
 They can also view it on the logbook in detail and scroll through all the previous data, this was chosen to support viewing all the data
 If the user chose to.
 
