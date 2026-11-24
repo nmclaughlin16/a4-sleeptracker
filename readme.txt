@@ -24,6 +24,7 @@
 
 
 5. Is there anything special we need to know in order to run your code?
+
 No, just the standard "ionic serve" should work.
 
 
@@ -31,11 +32,17 @@ No, just the standard "ionic serve" should work.
 
 
 6. Did you design your app with a particular type of user in mind? If so, whom?
-Please view the app in devtools with an iPhone 16 device selected
+
+Not in particular, we tried to make this app as accessible to all audiences as possible. If we were
+forced to choose an answer, we would say younger people, as the scroller to put in the time is most likely more
+common and easily understood among young people as opposed to older people.
 
 
 7. Did you design your app specifically for iOS or Android, or both?
-Ios, followed conventions like logbook button/save on the top right and then back/cancel button on the left.
+
+We designed the app with both iOS and Android in mind. For instance, we decided to put the two buttons at the 
+bottom of the home page, which is a common design choice for both iOS and Android. The nature of ionic meant that
+we did not have to tailor too heavily to either one. 
 
 
 8. How can a person log overnight sleep in your app? Why did you choose to support logging overnight sleep in this way?

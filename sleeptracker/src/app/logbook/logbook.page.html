@@ -2,19 +2,21 @@
   <ion-toolbar>
     <!-- back button on left side navigates back to the home page-->
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button defaultHref="/home" text="Home"></ion-back-button>
     </ion-buttons>
 
     <!-- page title -->
-    <ion-title>Logbook</ion-title>
+    <ion-title style="text-align:center; font-size:1.5rem; font-family:Georgia, 'Times New Roman', Times, serif">Logbook</ion-title>
 
     <!-- buttons that open forms for logging sleep (alarm icon) or sleepiness (battery-half icon)  -->
     <ion-buttons slot="end">
       <ion-button (click)="openForm('sleep')">
-        <ion-icon slot="icon-only" name="alarm"></ion-icon>
+        <ion-icon slot="start" name="alarm"></ion-icon>
+        Sleep
       </ion-button>
       <ion-button (click)="openForm('sleepiness')">
-        <ion-icon slot="icon-only" name="battery-half"></ion-icon>
+        <ion-icon slot="start" name="battery-half"></ion-icon>
+        Sleepiness
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
